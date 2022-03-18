@@ -13,6 +13,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
+import frc.robot.controller.LogitechButtons;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -55,15 +56,6 @@ public class Robot extends TimedRobot {
     // Initialize joysticks
     controller = new Joystick(0);
     flightStick = new Joystick(1);
-
-    // Invert motors
-    leftMotor1.setInverted(false);
-    leftMotor2.setInverted(false);
-    rightMotor1.setInverted(false);
-    rightMotor2.setInverted(false);
-
-    armMotor.setInverted(false);
-    intakeMotor.setInverted(true);
 
   }
 
@@ -113,10 +105,10 @@ public class Robot extends TimedRobot {
     rightMotor2.set(-right);
 
     // Intake
-    if (controller.getRawButton(4) || flightStick.getRawButton(4)) {
+    if (controller.getRawButton(LogitechButtons.RB) || flightStick.getRawButton(5)) {
       // In
       intakeMotor.set(0.2);
-    } else if(controller.getRawButton(5) || flightStick.getRawButton(2)) {
+    } else if(controller.getRawButton(LogitechButtons.LB) || flightStick.getRawButton(3)) {
       // Out
       intakeMotor.set(-0.2);
     } else {
@@ -125,7 +117,7 @@ public class Robot extends TimedRobot {
     }
 
     // Arm
-    if (controller.getRawAxis(3) > 0.5 || flightStick.getPOV(0) == 0) {
+    /*if (controller.getRawAxis(3) > 0.5 || flightStick.getPOV(0) == 0) {
       // In
       armMotor.set(0.2);
     } else if(controller.getRawAxis(2) > 0.5 || flightStick.getPOV(0) == 90) {
@@ -134,7 +126,7 @@ public class Robot extends TimedRobot {
     } else {
       // Stop
       armMotor.set(0);
-    }
+    }*/
   }
 
   @Override
