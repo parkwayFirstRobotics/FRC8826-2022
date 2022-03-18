@@ -41,23 +41,29 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
 
+    // Initialize drive train motors
     leftMotor1 = new CANSparkMax(1, MotorType.kBrushed);
     leftMotor2 = new CANSparkMax(2, MotorType.kBrushed);
     rightMotor1 = new CANSparkMax(3, MotorType.kBrushed);
     rightMotor2 = new CANSparkMax(4, MotorType.kBrushed);
 
+    // Initialize other motors
     armMotor = new CANSparkMax(6, MotorType.kBrushless);
     armMotor.setIdleMode(IdleMode.kBrake);
     intakeMotor = new CANSparkMax(7, MotorType.kBrushed);
     
+    // Initialize joysticks
     controller = new Joystick(0);
     flightStick = new Joystick(1);
 
+    // Invert motors
     leftMotor1.setInverted(false);
     leftMotor2.setInverted(false);
-
     rightMotor1.setInverted(false);
     rightMotor2.setInverted(false);
+
+    armMotor.setInverted(false);
+    intakeMotor.setInverted(true);
 
   }
 
@@ -75,8 +81,8 @@ public class Robot extends TimedRobot {
     if (time - startTime < 3) {
       leftMotor1.set(0.6);
       leftMotor2.set(0.6);
-      rightMotor1.set(-0.6);
-      rightMotor2.set(-0.6);
+      rightMotor1.set(0.6);
+      rightMotor2.set(0.6);
     } else {
       leftMotor1.set(0);
       leftMotor2.set(0);
